@@ -1,0 +1,4 @@
+*/__pycache__
+quack_venv/
+.pytest_cache
+.env
