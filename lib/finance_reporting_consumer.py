@@ -7,7 +7,7 @@ from helpers import *
 # Necessary setup below – do not edit this
 
 dynamodb_resource = boto3.resource("dynamodb", region_name='eu-west-2')
-finance_table = dynamodb_resource.Table("finance-reporting")
+finance_table = dynamodb_resource.Table("water-finance-reporting")
 consumer = make_consumer(os.environ['KAFKA_BOOTSTRAP_SERVER'])
 
 # (End of the setup)

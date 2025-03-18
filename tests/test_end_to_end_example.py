@@ -57,7 +57,7 @@ class TestDataPipeline:
             'item_url': 'my-fake-product',
             'amount': 10.00
         })
-        
+    
         producer.produce('events', key="order-"+str(uuid.uuid4()), value=bytes(json_str, encoding="utf-8"))
         producer.flush(3)
         
@@ -69,5 +69,3 @@ class TestDataPipeline:
         new_total_item_count = new_item_data['Item']['TotalItemCount']
 
         assert current_total_item_count < new_total_item_count
-
-    # {'Item': {'TotalItemCount': Decimal('43827'), 'Date': '2025-03-17', 'TotalDueToMerchant': Decimal('1481597.9599999999751100027145999'), 'TotalAmount': Decimal('1949471'), 'TotalCommission': Decimal('77978.840000000003246521385043685'), 'TotalTax': Decimal('389894.20000000002164347590041119')}, 'ResponseMetadata': {'RequestId': 'F77AENV21Q2DIPQUJ7ND65JL2JVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Mon, 17 Mar 2025 15:37:23 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '273', 'connection': 'keep-alive', 'x-amzn-requestid': 'F77AENV21Q2DIPQUJ7ND65JL2JVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '514175792'}, 'RetryAttempts': 0}}
