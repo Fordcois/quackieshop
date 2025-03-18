@@ -20,7 +20,7 @@ def oauth_cb(oauth_config):
 
 conf = {
     # Make sure to use the public bootstrap URL of your cluster here
-    'bootstrap.servers': 'b-2.watermonitoringeventsm.k7yy6p.c3.kafka.eu-west-2.amazonaws.com:9098,b-1.watermonitoringeventsm.k7yy6p.c3.kafka.eu-west-2.amazonaws.com:9098',
+    'bootstrap.servers': 'b-2-public.watermonitoringeventsm.k7yy6p.c3.kafka.eu-west-2.amazonaws.com:9198,b-1-public.watermonitoringeventsm.k7yy6p.c3.kafka.eu-west-2.amazonaws.com:9198',
     'client.id': socket.gethostname(),
     'security.protocol': 'SASL_SSL',
     'sasl.mechanisms': 'OAUTHBEARER',
@@ -49,7 +49,6 @@ class TestDataPipeline:
         current_total_item_count = item_data['Item']['TotalItemCount']
         
         # 1. Send JSON input event to topic
-        # json = '{"user_id":"'+str(current_user_id)+'", "event_name": "'+event+'", "page": "'+path+'", "item_url": '+item+', "order_email": "'+email+'", "amount": "'+str(amount)+'" }'
         json_str = json.dumps({
             'user_id': 'fake-user-id',
             'event_name': 'order_confirmed',
@@ -68,4 +67,4 @@ class TestDataPipeline:
         new_item_data = table.get_item(Key={'Date': today})
         new_total_item_count = new_item_data['Item']['TotalItemCount']
 
-        assert current_total_item_count < new_total_item_count
+        assert new_total_item_count  == (current_total_item_count +1 )
